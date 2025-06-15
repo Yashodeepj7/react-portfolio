@@ -1,0 +1,19 @@
+Table tbody tr td{
+    font-size: 17px;
+    font-weight: 400;
+}
+
+Table thead tr th{
+    font-size: 20px;
+    /* font-weight: 600; */
+}
+
+Table .tbody tr td:nth-child(3) {
+    display:flex;
+    justify-content: center;
+}
+
+Table .tbodyContact tr td:nth-child(4){
+    display:flex;
+    justify-content: center;
+}
