@@ -1,0 +1,137 @@
+.home-about-section {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #090909;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  
+  .purple {
+    color: #c770f0;
+  }
+  
+  .home-about-description h1 {
+    font-size: 2.6em;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+  
+  .home-about-body {
+    font-size: 1.2em;
+    line-height: 1.8;
+    text-align: justify;
+    padding-right: 15px;
+  }
+  
+  .myAvtar {
+    text-align: center;
+    padding-top: 30px;
+  }
+  
+  .avatar-img {
+    border-radius: 50%;
+    background-color: #c770f0;
+    padding: 10px;
+    max-width: 250px;
+  }
+  
+  .home-about-social {
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  .home-about-social h1 {
+    font-size: 2em;
+    padding-bottom: 10px;
+  }
+  
+  .home-about-social-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 0;
+  }
+  
+  .social-icons a {
+    color: white;
+    font-size: 1.8em;
+    transition: 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+    color: #c770f0;
+    transform: scale(1.2);
+  }
+  
+  /* Techstack css */
+
+  .tech{
+    background-color: #090909;
+  }
+  .tech-scroll-wrapper {
+    overflow: hidden;
+    width: 100%;
+    padding: 40px 0;
+    background: transparent;
+  }
+  
+  .tech-scroll-track {
+    display: flex;
+    gap: 30px;
+    animation: scroll 30s linear infinite;
+    width: max-content;
+  }
+  
+  .tech-scroll-card {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+  }
+  
+  /* Gradient border */
+  .tech-scroll-card::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #ff00cc, #3333ff);
+    z-index: -1;
+  }
+  
+  /* Icon styling */
+  .icon-wrapper {
+    font-size: 3rem;
+    color: #ffffff;
+  }
+  
+  /* Hover effect */
+  .tech-scroll-card:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  
