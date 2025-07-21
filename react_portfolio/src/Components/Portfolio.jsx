@@ -48,10 +48,9 @@ const Portfolio = () => {
   return (
     <div className="div w-100">
       <Container fluid style={{ backgroundColor: "#0a0a0a" }}>
-        <Container className="text-center text-white py-5">
-          <h2 className="mb-3">
-            My Recent <span style={{ color: "#a855f7" }}>Works</span>
-          </h2>
+        <Container className="text-center text-white py-1">
+          <h2 className="text-center mb-4  text-white">My <span className="purple">Projects</span></h2>
+
           <p className="mb-4">Here are a few projects I've worked on recently.</p>
           <Row className="justify-content-center cards">
             {projects.length > 0 ? (

@@ -8,9 +8,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/portfolioDB')
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
-.catch((err) => console.log("*************DB Connection Error:***********"));
+.catch((err) => {
+    console.log("************DB Connection Error:***********")
+    console.log(err);
+});
 
 app.use(express.json());
 

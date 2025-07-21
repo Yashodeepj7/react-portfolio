@@ -21,15 +21,16 @@ function Home2() {
             <h1>
               LET ME <span className="purple">INTRODUCE</span> MYSELF
             </h1>
-            <p className="home-about-body">
-              I fell in love with programming and I have at least learnt something, I think… 🤷‍♂️
-              <br /><br />
-              I am fluent in classics like <i><b className="purple">C++, Javascript and Go.</b></i>
-              <br /><br />
-              My field of Interest's are building new <i><b className="purple">Web Technologies and Products</b></i> and also in areas related to <i><b className="purple">Blockchain.</b></i>
-              <br /><br />
-              Whenever possible, I also apply my passion for developing products with <b className="purple">Node.js</b> and <i><b className="purple">Modern Javascript Library and Frameworks</b></i> like <i><b className="purple">React.js and Next.js</b></i>
-            </p>
+           <p className="home-about-body">
+  I fell in love with programming and have been exploring and building ever since! 🚀
+  <br /><br />
+  I’m confident in working with technologies like <i><b className="purple">HTML, CSS, JavaScript, Java, and React.</b></i>
+  <br /><br />
+  My areas of interest include creating innovative <i><b className="purple">Web Applications and Full Stack Projects</b></i>, and I'm also passionate about <i><b className="purple">learning new frameworks and tools.</b></i>
+  <br /><br />
+  Whenever possible, I love building real-world projects using <b className="purple">MERN Stack</b> and modern tools like <i><b className="purple">Bootstrap, Tailwind CSS, and Firebase</b></i>.
+</p>
+
           </Col>
           <Col md={4} className="myAvtar">
             <Tilt>
@@ -38,7 +39,7 @@ function Home2() {
           </Col>
         </Row>
         <Row>
-          <Col md={12} className="home-about-social">
+          {/* <Col md={12} className="home-about-social">
             <h1>FIND ME ON</h1>
             <p>
               Feel free to <span className="purple">connect </span>with me
@@ -65,21 +66,30 @@ function Home2() {
                 </a>
               </li>
             </ul>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
      
     </Container>
-    <Container style={{  backgroundColor: "#000000"}}>
-         <div className="tech bg-dark" style={{  backgroundColor: "#000000"}}>
-      <h1 className="project-heading">
-  Professional <strong className="purple">Skillset </strong>
-</h1>
-<Techstack />
+    <div style={{  backgroundColor: "#000000"}}>
+      <Container>
+        <h1 className="project-heading py-3 ">
+            <span className="text-light">My </span>
+  <span className="purple">Techstack </span>
+</h1> 
+</Container>
+    <Container fluid className="m-0 p-0 "style={{  backgroundColor: "#000000"}}>
+    <div className="scroll-fade-container">
+  <div className="scroll-inner-center-wrapper">
+    <div className="logo-row">
+      <Techstack />
+    </div>
+  
+  </div>
+</div>
 
-      </div>
-    </Container>
-
+  </Container>
+</div>
     </div>
     </>
   );

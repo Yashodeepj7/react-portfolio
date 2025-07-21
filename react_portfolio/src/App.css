@@ -4,6 +4,14 @@
   padding: 2rem;
   text-align: center;
 }
+/* body {
+  margin: 0;
+  padding: 0;
+  overflow-x: scroll;
+  scrollbar-width: none;
+    -ms-overflow-style: none; 
+} */
+
 
 .logo {
   height: 6em;
@@ -47,7 +55,7 @@
 /* About Section */
 .home-about-section {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   background-color: #090909;
   color: white;

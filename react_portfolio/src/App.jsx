@@ -9,6 +9,7 @@ import {ContactSection} from "./Components/ContactSection";
 import {Footer} from "./Components/Footer";
 import Portfolio from "./Components/Portfolio";
 import About from './Components/About'
+import { Works } from "./Components/Works/Works";
 
 
 
@@ -19,7 +20,8 @@ const App = () => {
       <Navigation />
       <HeroSection />
       <About />
-      <Portfolio />
+      {/* <Portfolio /> */}
+      <Works />
       <ContactSection />
       <Footer />
     </>
