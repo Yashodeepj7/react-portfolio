@@ -7,6 +7,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import "./style.css";
 
 export const FormCompo = () => {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [user, setUser] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -22,7 +23,7 @@ export const FormCompo = () => {
   // Fetch projects
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}getproject`)
+      .get(`${backendUrl}/getproject`)
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -58,7 +59,7 @@ export const FormCompo = () => {
       if (newUser.image) formData.append("image", newUser.image);
   
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}registerproject`,
+        `${backendUrl}registerproject`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -97,7 +98,7 @@ export const FormCompo = () => {
       if (editingUser.image) formData.append("image", editingUser.image);
 
       await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}updateproject/${editingUser._id}`,
+        `${backendUrl}updateproject/${editingUser._id}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -114,7 +115,7 @@ export const FormCompo = () => {
   // Delete Project
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}deleteproject/${id}`);
+      await axios.delete(`${backendUrl}deleteproject/${id}`);
       setUser(user.filter((u) => u._id !== id));
     } catch (error) {
       console.error("Error deleting project:", error);
@@ -181,7 +182,7 @@ export const FormCompo = () => {
                 <td>
                   {demo.image && (
                     <img
-                      src={`${import.meta.env.VITE_BACKEND_URL}images/${demo.image}`}
+                      src={`${backendUrl}images/${demo.image}`}
                       alt="Project"
                       style={{ width: "50px", height: "50px" }}
                     />
