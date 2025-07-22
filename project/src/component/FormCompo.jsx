@@ -22,7 +22,7 @@ export const FormCompo = () => {
   // Fetch projects
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getproject")
+      .get(`${import.meta.env.VITE_BACKEND_URL}getproject`)
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -58,7 +58,7 @@ export const FormCompo = () => {
       if (newUser.image) formData.append("image", newUser.image);
   
       const response = await axios.post(
-        "http://localhost:8000/registerproject",
+        `${import.meta.env.VITE_BACKEND_URL}registerproject`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -97,7 +97,7 @@ export const FormCompo = () => {
       if (editingUser.image) formData.append("image", editingUser.image);
 
       await axios.put(
-        `http://localhost:8000/updateproject/${editingUser._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}updateproject/${editingUser._id}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -114,7 +114,7 @@ export const FormCompo = () => {
   // Delete Project
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/deleteproject/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}deleteproject/${id}`);
       setUser(user.filter((u) => u._id !== id));
     } catch (error) {
       console.error("Error deleting project:", error);
@@ -181,7 +181,7 @@ export const FormCompo = () => {
                 <td>
                   {demo.image && (
                     <img
-                      src={`http://localhost:8000/images/${demo.image}`}
+                      src={`${import.meta.env.VITE_BACKEND_URL}images/${demo.image}`}
                       alt="Project"
                       style={{ width: "50px", height: "50px" }}
                     />

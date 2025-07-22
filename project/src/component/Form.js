@@ -20,7 +20,7 @@ export const ProjectForm = () => {  // Renamed from Form to ProjectForm
 
   // Fetch users from API
   useEffect(() => {
-    axios.get("http://localhost:8000/getcontact")
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}getcontact`)
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -44,7 +44,7 @@ export const ProjectForm = () => {  // Renamed from Form to ProjectForm
     newData.append("image", image);
 
     try {
-      const res = await axios.post("http://localhost:8000/registerproject", newData, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}registerproject`, newData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Data added successfully!");
@@ -68,7 +68,7 @@ export const ProjectForm = () => {  // Renamed from Form to ProjectForm
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/update/${editingUser._id}`, editingUser);
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}update/${editingUser._id}`, editingUser);
       setUser(user.map((u) => (u._id === editingUser._id ? editingUser : u)));
       setShowEditForm(false);
     } catch (error) {
@@ -79,7 +79,7 @@ export const ProjectForm = () => {  // Renamed from Form to ProjectForm
   // Delete User Function
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/deletecontact/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}deletecontact/${id}`);
       setUser(user.filter((u) => u._id !== id));
     } catch (error) {
       console.error("Error deleting user:", error);

@@ -19,7 +19,7 @@ export const ContactCompo = ()=>
 
      // Fetch users from API
   useEffect(() => {
-    axios.get("http://localhost:8000/getcontact")
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}getcontact`)
     .then((res) => setUser(res.data))
     .catch((err) => console.log(err));
   }, []);
@@ -44,7 +44,7 @@ export const ContactCompo = ()=>
   // Delete User Function
 const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/deletecontact/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}deletecontact/${id}`);
       setUser(user.filter((u) => u._id !== id)); // Update UI after deletion
     } catch (error) {
       console.error("Error deleting user:", error);
