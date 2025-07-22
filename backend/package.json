@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/App.js",
-  "server": "nodemon backend/App.js",
-  "client": "npm start --prefix react_portfolio",
-  "build": "npm run build --prefix react_portfolio"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
