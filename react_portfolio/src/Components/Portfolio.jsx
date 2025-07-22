@@ -37,7 +37,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getproject") 
+      .get(`${import.meta.env.VITE_BACKEND_URL}getproject`) 
       .then((res) => {
         console.log("API Response:", res.data); // Debugging: Check response format
         setProjects(res.data);
@@ -59,7 +59,7 @@ const Portfolio = () => {
                   <Card className="text-white bg-dark border border-secondary w-100 shadow-lg" style={{ minHeight: "400px" }}>
                     <Card.Img
                       variant="top"
-                      src={`http://localhost:8000/images/${project.image}`} // Using default image since API doesn't provide one
+                      src={`${import.meta.env.VITE_BACKEND_URL}images/${project.image}`} // Using default image since API doesn't provide one
                       alt={project.projectName}
                       style={{ height: "200px", objectFit: "cover" }}
                       className="hover-zoom hover-shadow"
