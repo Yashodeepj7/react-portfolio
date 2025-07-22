@@ -4,10 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/app.js",
-  "server": "nodemon backend/app.js",
-  "client": "npm start --prefix frontend",
-  "build": "npm run build --prefix frontend"
+    "start": "node backend/App.js",
+  "server": "nodemon backend/App.js",
+  "client": "npm start --prefix react_portfolio",
+  "build": "npm run build --prefix react_portfolio"
   },
   "author": "",
   "license": "ISC",
