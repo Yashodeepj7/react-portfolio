@@ -6,6 +6,7 @@ const cors = require('cors'); //use when we run frontend and backend on differen
 app.use(cors());
 const dotenv = require('dotenv');
 dotenv.config();
+const path = require('path');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI)
@@ -26,6 +27,12 @@ app.use('/images',express.static('Images'));//using Images folder
 const route3 = require('./route/authRoute');//importing route.js
 app.use('/auth', route3);
 
+// Serve frontend build
+app.use(express.static(path.join(__dirname, '../react_portfolio/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 app.get(('/'),(req, res) => {
     res.send('connect');
 })
