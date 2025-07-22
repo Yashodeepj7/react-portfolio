@@ -188,7 +188,7 @@ useEffect(() => {
                 <td>
                   {demo.image && (
                     <img
-                      src={`${backendUrl}images/${demo.image}`}
+                      src={`${backendUrl}/images/${demo.image}`}
                       alt="Project"
                       style={{ width: "50px", height: "50px" }}
                     />
