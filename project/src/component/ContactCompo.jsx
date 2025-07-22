@@ -8,7 +8,7 @@ import './style.css';
 
 export const ContactCompo = ()=>
 {
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const [user, setUser] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [newUser, setNewUser] = useState(
@@ -19,7 +19,7 @@ export const ContactCompo = ()=>
 
      // Fetch users from API
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}getcontact`)
+    axios.get(`${backendUrl}/getcontact`)
     .then((res) => setUser(res.data))
     .catch((err) => console.log(err));
   }, []);
@@ -44,7 +44,7 @@ export const ContactCompo = ()=>
   // Delete User Function
 const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}deletecontact/${id}`);
+      await axios.delete(`${backendUrl}/deletecontact/${id}`);
       setUser(user.filter((u) => u._id !== id)); // Update UI after deletion
     } catch (error) {
       console.error("Error deleting user:", error);

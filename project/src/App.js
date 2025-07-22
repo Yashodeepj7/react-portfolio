@@ -3,7 +3,7 @@ import Sidebar from "./component/Sidebar";
 import Nav from "./component/Nav";
 import Foot from "./component/Foot";
 import Dashboard from "./component/Dashboard";
-import { TableCompo } from "./component/TableCompo";
+// import { TableCompo } from "./component/TableCompo";
 import { ContactCompo } from "./component/ContactCompo";
 import { FormCompo } from "./component/FormCompo";
 import { LoginForm } from "./component/LoginCompo";
@@ -69,7 +69,7 @@ function App() {
             </div>
             <div className="content mx-3 my-5 py-4">
               {activeComponent === "Dashboard" && <Dashboard />}
-              {activeComponent === "Table" && <TableCompo />}
+              {activeComponent === "Table" && <h2>Table Component</h2>}
               {activeComponent === "Home" && <h2>Home Page</h2>}
               {activeComponent === "Contact" && <ContactCompo />}
               {activeComponent === "Form" && <FormCompo />}

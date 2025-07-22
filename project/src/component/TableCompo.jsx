@@ -5,7 +5,7 @@ import axios from "axios";
 import { FaPlus, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
-export const TableCompo = () => {
+ const TableCompo = () => {
   const [user, setUser] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [newUser, setNewUser] = useState(
