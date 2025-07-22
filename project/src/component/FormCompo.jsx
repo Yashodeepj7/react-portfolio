@@ -21,12 +21,16 @@ export const FormCompo = () => {
   const [editingUser, setEditingUser] = useState(null);
 
   // Fetch projects
-  useEffect(() => {
-    axios
-      .get(`${backendUrl}/getproject`)
-      .then((res) => setUser(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+useEffect(() => {
+  axios
+    .get(`${backendUrl}/getproject`)
+    .then((res) => {
+      console.log("GET /getproject RESPONSE:", res.data); // 👀 Add this
+      setUser(res.data);
+    })
+    .catch((err) => console.log(err));
+}, []);
+
 
   // Handle Add Form Change
   const handleChange = (e) => {
