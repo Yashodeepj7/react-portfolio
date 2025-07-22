@@ -56,7 +56,7 @@ const handleDelete = async (id) => {
         <>
             <div className="dashboard container">
                 <div className="dash-nav d-flex pt-4 pb-2 justify-content-md-between justify-content-around container"></div>
-             <p className="d-flex"> <span className='dash-icon shadow '><box-icon name='contact' type='solid' color='#ffff' width='30px' height='30px'></box-icon></span><span className="mx-1 fs-3">Contact</span></p>
+             {/* <p className="d-flex"> <span className='dash-icon shadow '><box-icon name='contact' type='solid' color='#ffff' width='30px' height='30px'></box-icon></span><span className="mx-1 fs-3">Contact</span></p> */}
             </div>
             <div>
             <Container>
