@@ -5,7 +5,7 @@ import axios from "axios";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import "./Hero.css"; // Make sure this CSS file exists
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaGithub } from "react-icons/fa";
-import resume from "../assets/Yashodeep-Joshi-Cv.pdf"
+import resume from "../assets/Yashodeep-Joshi-CV.pdf"
 export const HeroSection = () => {
   const [user, setUser] = useState([]);
   const titles = ["Freelancer", "MERN Developer"];
