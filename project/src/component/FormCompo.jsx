@@ -23,9 +23,11 @@ export const FormCompo = () => {
   // Fetch projects
 useEffect(() => {
   axios
-    .get(`${backendUrl}/getproject`)
+    .get(`${process.env.REACT_APP_BACKEND_URL}/getproject`)
     .then((res) => {
-      console.log("GET /getproject RESPONSE:", res.data); // 👀 Add this
+      // console.log("GET /getproject RESPONSE:", res.data); // 👀 Add this
+      console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL);
+
       setUser(res.data);
     })
     .catch((err) => console.log(err));
