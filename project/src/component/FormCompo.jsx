@@ -65,7 +65,7 @@ useEffect(() => {
       if (newUser.image) formData.append("image", newUser.image);
   
       const response = await axios.post(
-        `${backendUrl}registerproject`,
+        `${backendUrl}/registerproject`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -104,7 +104,7 @@ useEffect(() => {
       if (editingUser.image) formData.append("image", editingUser.image);
 
       await axios.put(
-        `${backendUrl}updateproject/${editingUser._id}`,
+        `${backendUrl}/updateproject/${editingUser._id}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -121,7 +121,7 @@ useEffect(() => {
   // Delete Project
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${backendUrl}deleteproject/${id}`);
+      await axios.delete(`${backendUrl}/deleteproject/${id}`);
       setUser(user.filter((u) => u._id !== id));
     } catch (error) {
       console.error("Error deleting project:", error);

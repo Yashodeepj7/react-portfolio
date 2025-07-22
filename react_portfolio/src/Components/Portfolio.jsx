@@ -37,7 +37,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}getproject`) 
+      .get(`${import.meta.env.VITE_BACKEND_URL}/getproject`) 
       .then((res) => {
         console.log("API Response:", res.data); // Debugging: Check response format
         setProjects(res.data);

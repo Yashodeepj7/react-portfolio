@@ -18,7 +18,7 @@ export const ContactSection = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}register`, newUser);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, newUser);
         setUser([...contact, response.data]); // Update UI
         
         setNewUser({ name: "", email: "" ,message:""});
