@@ -2,7 +2,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import "./Works.css";
 import git from "../../assets/git.png"; // Ensure this path is correct
 import meta from "../../assets/meta.png"; // Ensure this path is correct
-import java from "../../assets/java-certificate.png"; // Ensure this path is correct
+import java from "../../assets/java-certificate.jpg"; // Ensure this path is correct
 const certificationsData = [
   {
     title: "Meta Front-End Developer",
