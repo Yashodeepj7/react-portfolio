@@ -9,8 +9,8 @@ export const Navigation = () => {
         <Nav className="nav-links d-flex justify-content-center align-items-center">
           <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="#about">About</Nav.Link>
-          <Nav.Link href="#projects">Projects</Nav.Link>
-          <Nav.Link href="#resume">Resume</Nav.Link>
+          <Nav.Link href="#project">Projects</Nav.Link>
+          <Nav.Link href="https://showcase.talenlio.com/w/Yashodeep-Yogesh-Joshi-17895">Resume</Nav.Link>
           <Nav.Link href="#contact">Contact</Nav.Link>
         </Nav>
       </div>
