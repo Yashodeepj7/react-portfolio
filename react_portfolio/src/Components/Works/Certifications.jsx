@@ -16,7 +16,7 @@ const certificationsData = [
     provider: "Symbiosis, KK Wagh",
     issued: "March 2024",
     image: java,
-    credentialUrl: "https://your-cert-link.com",
+    credentialUrl: "https://drive.google.com/file/d/16CygxyxYKDIWuoZ4sF-TxuaeoCs_U8Is/view?usp=drive_link",
   },
   {
     title: "Git and Github",
