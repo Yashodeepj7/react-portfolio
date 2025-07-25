@@ -2,6 +2,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import "./Works.css";
 import git from "../../assets/git.png"; // Ensure this path is correct
 import meta from "../../assets/meta.png"; // Ensure this path is correct
+import java from "../../assets/java-certificate.png"; // Ensure this path is correct
 const certificationsData = [
   {
     title: "Meta Front-End Developer",
@@ -14,7 +15,7 @@ const certificationsData = [
     title: "Java Full Stack Developer",
     provider: "Symbiosis, KK Wagh",
     issued: "March 2024",
-    image: "https://cdn.educba.com/img/Free-Graphic-Design-Online-Course-Certificate.jpg",
+    image: java,
     credentialUrl: "https://your-cert-link.com",
   },
   {
