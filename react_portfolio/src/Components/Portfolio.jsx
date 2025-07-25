@@ -47,7 +47,7 @@ const Portfolio = () => {
 
   return (
     <div className="div w-100">
-      <Container fluid style={{ backgroundColor: "#0a0a0a" }}>
+      <Container fluid style={{ backgroundColor: "#0a0a0a" }} id="project">
         <Container className="text-center text-white py-1">
           <h2 className="text-center mb-4  text-white">My <span className="purple">Projects</span></h2>
 
