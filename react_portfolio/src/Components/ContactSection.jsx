@@ -27,7 +27,7 @@ export const ContactSection = () => {
       }
     };
   return (
-      <div className="contact-section" style={{ backgroundColor: "#0b1622", padding: "50px 0", textAlign: "center" }}>
+      <div className="contact-section" id="contact" style={{ backgroundColor: "#0b1622", padding: "50px 0", textAlign: "center" }}>
         <Container>
           <h2 style={{ color: "white", marginBottom: "20px" }}>
             Contact <span style={{ color: "#00eaff" }}>Us</span>
