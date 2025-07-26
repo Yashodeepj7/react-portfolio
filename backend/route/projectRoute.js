@@ -32,5 +32,17 @@ route.delete('/deleteproject/:_id',deleteProject)//delete method used to delete 
 //UPDATE
 //route.put('/update/:_id',updateuser)//put method used to update data
 
-route.put('/updateproject/:_id',updateProject)
+route.put('/updateproject/:_id', (req, res) => {
+  photoUpload(req, res, function (err) {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ message: 'Image size should not exceed 1MB' });
+      }
+      return res.status(500).json({ message: 'Image upload failed', error: err.message });
+    }
+
+    updateProject(req, res);
+  });
+});
+
 module.exports = route;
