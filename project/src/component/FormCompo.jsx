@@ -188,7 +188,7 @@ useEffect(() => {
                 <td>
                   {demo.image && (
                     <img
-                      src={`${backendUrl}/images/${demo.image}`}
+                      src={demo.image} // Using the image URL from the API
                       alt="Project"
                       style={{ width: "50px", height: "50px" }}
                     />

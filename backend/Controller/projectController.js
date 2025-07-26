@@ -1,79 +1,69 @@
-const model = require('../model/projectModel'); // Ensure correct model import
+const model = require('../model/projectModel');
 
-//POST API
+// POST API
 const addProject = async (req, res) => {
-    const { projectName,projectDisc,githubLink,demoLink} = req.body //taking data from user
-    // const { empid, empname} = req.body
-    try{
+  const { projectName, projectDisc, githubLink, demoLink } = req.body;
+  try {
+    const data = await model.create({
+      projectName,
+      projectDisc,
+      githubLink,
+      demoLink,
+      image: req.file ? req.file.path : null, // ✅ Cloudinary image URL
+    });
+    res.status(200).send(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error adding project");
+  }
+};
 
-        const data = await model.create({   //chacking req.body data is same or not and storing into database
-            projectName,
-            projectDisc,
-            githubLink,
-            demoLink,
-            image: req.file.filename //image name
-        })
-        res.status(200).send(data);
-
-    }
-
-    catch(err){
-        console.log(err);
-    }
-}
-
-//Get API
+// GET API
 const getProject = async (req, res) => {
-    try{
-        
-        const projectData = await model.find();
-        res.status(200).send(projectData);//this line is always same
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+  try {
+    const projectData = await model.find();
+    res.status(200).send(projectData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error fetching projects");
+  }
+};
 
-//Delete API
-const deleteProject = async (req,res)=>{
-    try{
-        const deletedata = await model.deleteOne({_id:req.params._id})
-        res.status(200).send(deletedata)
+// DELETE API
+const deleteProject = async (req, res) => {
+  try {
+    const deletedata = await model.deleteOne({ _id: req.params._id });
+    res.status(200).send(deletedata);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error deleting project");
+  }
+};
+
+// UPDATE API
+const updateProject = async (req, res) => {
+  try {
+    const updateFields = {
+      projectName: req.body.projectName,
+      projectDisc: req.body.projectDisc,
+      githubLink: req.body.githubLink,
+      demoLink: req.body.demoLink,
+    };
+
+    if (req.file) {
+      updateFields.image = req.file.path; // ✅ Cloudinary image URL if new image uploaded
     }
 
-    catch(err){
-        console.log(err)
-    }
-}
+    const updatedata = await model.updateOne(
+      { _id: req.params._id },
+      { $set: updateFields }
+    );
 
-//Update API
-const updateProject = async (req,res)=>{
-    try{
-        const updatedata = await model.updateOne({_id:req.params._id},req.body)
-        res.status(200).send(updatedata)
-    }
+    res.status(200).send(updatedata);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error updating project");
+  }
+};
 
-    catch(err){
-        console.log(err)
-    }
-}
-
-// const updateuser = async (req,res)=>{
-//     const {name,email,rollno} = req.body;
-//     try{
-//         const updatedata = await model.updateOne({_id:req.params._id},{$set:{name,email,rollno}}
-//             );
-//             if(updatedata.modifiedCount > 0)
-//             {
-//                 res.status(200).send(updatedata);
-//             }
-//             else{
-//                 res.status(500).send(updatedata)
-//             }
-// }
-// catch(err)
-// {
-//     console.log(err);
-// }
-// }
-module.exports = {addProject,getProject,deleteProject,updateProject} //exporting add and getdata function to route.js
+module.exports = { addProject, getProject, deleteProject, updateProject };
