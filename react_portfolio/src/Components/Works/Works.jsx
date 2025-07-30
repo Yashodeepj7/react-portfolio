@@ -9,7 +9,7 @@ export const Works = () => {
   const buttonStyle = (tab) => ({
     borderRadius: "50px",
     padding: "10px 25px",
-    border: "2px solid white",
+    border: "2px solid purple",
     backgroundColor: activeTab === tab ? "#ffffff" : "transparent",
     color: activeTab === tab ? "#000000" : "#ffffff",
     margin: "0 10px",
