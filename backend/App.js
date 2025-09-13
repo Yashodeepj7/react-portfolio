@@ -19,9 +19,12 @@ app.use(express.json());
 
 const route = require('./route/contactRoute');//importing route.js
 const route2 = require('./route/projectRoute');//importing route.js
+const certificationRoutes = require("./route/certificationRoutes.js");
+
 app.use('/',route2);//using route.js
 app.use('/',route);//using route.js
 app.use('/images',express.static('Images'));//using Images folder
+app.use("/api/certifications", certificationRoutes);
 
 const route3 = require('./route/authRoute');//importing route.js
 app.use('/auth', route3);

@@ -1,37 +1,24 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./Works.css";
-import git from "../../assets/git.png"; // Ensure this path is correct
-import meta from "../../assets/meta.png"; // Ensure this path is correct
-import java from "../../assets/java-certificate.jpg"; // Ensure this path is correct
-const certificationsData = [
-  {
-    title: "Meta Front-End Developer",
-    provider: "Coursera",
-    issued: "May 2024",
-    image: meta,
-    credentialUrl: "https://www.coursera.org/account/accomplishments/verify/VQZTBN6DM35T?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course",
-  },
-  {
-    title: "Java Full Stack Developer",
-    provider: "Symbiosis, KK Wagh",
-    issued: "Oct 2024",
-    image: java,
-    credentialUrl: "https://drive.google.com/file/d/16CygxyxYKDIWuoZ4sF-TxuaeoCs_U8Is/view?usp=drive_link",
-  },
-  {
-    title: "Git and Github",
-    provider: "CodeAcademy",
-    issued: "Jan 2025",
-    image:git,
-    credentialUrl: "https://drive.google.com/file/d/1LElyPvkeUPEyIzjqXeG2KCM8tLEBNZ2-/view?usp=sharing",
-  },
-];
 
 export const Certifications = () => {
+  const [certificationsData, setCertificationsData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/certifications`)
+      .then((res) => setCertificationsData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <section id="certifications" className="certifications-section py-5">
       <Container>
-        <h2 className="text-center mb-4  text-white">My <span className="purple">Certifications</span></h2>
+        <h2 className="text-center mb-4 text-white">
+          My <span className="purple">Certifications</span>
+        </h2>
         <Row>
           {certificationsData.map((cert, index) => (
             <Col md={4} sm={6} xs={12} key={index} className="mb-4">
@@ -39,7 +26,7 @@ export const Certifications = () => {
                 <div className="img-container">
                   <Card.Img
                     variant="top"
-                    src={cert.image}
+                    src={cert.imageUrl}
                     alt={`${cert.title} badge`}
                     className="cert-img"
                   />

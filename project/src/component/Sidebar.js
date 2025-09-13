@@ -30,7 +30,7 @@ const Sidebar = ({ setActiveComponent, setShowLogout }) => {
                         <span><box-icon type='solid' name='tachometer'></box-icon></span>
                     </li>
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>
-                        <a href='#' className='text-white text-decoration-none fw-bold' onClick={() => setActiveComponent("Table")}>Table</a>
+                        <a href='#' className='text-white text-decoration-none fw-bold' onClick={() => setActiveComponent("Certification")}>Certification</a>
                         <span><box-icon name='table'></box-icon></span>
                     </li>
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>

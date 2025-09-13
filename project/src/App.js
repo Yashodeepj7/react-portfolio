@@ -10,6 +10,7 @@ import { LoginForm } from "./component/LoginCompo";
 import { RegisterForm } from "./component/RegisterCompo";
 import { LogoutForm } from "./component/LogoutCompo";
 import "./App.css";
+import AdminCertifications from "./component/AdminCertifications";
 
 function App() {
   const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -69,7 +70,7 @@ function App() {
             </div>
             <div className="content mx-3 my-5 py-4">
               {activeComponent === "Dashboard" && <Dashboard />}
-              {activeComponent === "Table" && <h2>Table Component</h2>}
+              {activeComponent === "Certification" && <AdminCertifications />}
               {activeComponent === "Home" && <h2>Home Page</h2>}
               {activeComponent === "Contact" && <ContactCompo />}
               {activeComponent === "Form" && <FormCompo />}
