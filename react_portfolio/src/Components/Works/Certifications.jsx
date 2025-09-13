@@ -8,7 +8,7 @@ export const Certifications = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/api/certifications`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/certifications`)
       .then((res) => setCertificationsData(res.data))
       .catch((err) => console.log(err));
   }, []);
