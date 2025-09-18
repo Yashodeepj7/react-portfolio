@@ -1,69 +1,42 @@
-const Certification = require('../model/Certification');
+import Certification from "../model/Certification.js";
 
-const addCertification = async (req, res) => {
-  const { title, provider, issued, credentialUrl } = req.body;
-  try {
-    const cert = await Certification.create({
-      title,
-      provider,
-      issued,
-      credentialUrl,
-      imageUrl: req.file ? req.file.path : null, // ✅ Cloudinary URL
-    });
-    res.status(201).json(cert);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Error adding certification");
-  }
-};
-
-const getCertifications = async (req, res) => {
+export const getCertifications = async (req, res) => {
   try {
     const certs = await Certification.find();
-    res.status(200).json(certs);
+    res.json(certs);
   } catch (err) {
-    console.log(err);
-    res.status(500).send("Error fetching certifications");
+    res.status(500).json({ message: err.message });
   }
 };
 
-const updateCertification = async (req, res) => {
+export const addCertification = async (req, res) => {
   try {
-    const updateFields = {
-      title: req.body.title,
-      provider: req.body.provider,
-      issued: req.body.issued,
-      credentialUrl: req.body.credentialUrl,
-    };
+    const cert = new Certification(req.body);
+    await cert.save();
+    res.status(201).json(cert);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
-    if (req.file) {
-      updateFields.imageUrl = req.file.path; // ✅ new Cloudinary URL
-    }
-
-    const updated = await Certification.updateOne(
-      { _id: req.params._id },
-      { $set: updateFields }
+export const updateCertification = async (req, res) => {
+  try {
+    const cert = await Certification.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
     );
-    res.status(200).json(updated);
+    res.json(cert);
   } catch (err) {
-    console.log(err);
-    res.status(500).send("Error updating certification");
+    res.status(400).json({ message: err.message });
   }
 };
 
-const deleteCertification = async (req, res) => {
+export const deleteCertification = async (req, res) => {
   try {
-    await Certification.deleteOne({ _id: req.params._id });
+    await Certification.findByIdAndDelete(req.params.id);
     res.json({ message: "Deleted" });
   } catch (err) {
-    console.log(err);
-    res.status(500).send("Error deleting certification");
+    res.status(500).json({ message: err.message });
   }
-};
-
-module.exports = {
-  addCertification,
-  getCertifications,
-  updateCertification,
-  deleteCertification,
 };

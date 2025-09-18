@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
+
 const {
-  addCertification,
   getCertifications,
+  addCertification,
   updateCertification,
   deleteCertification
-} = require('../Controller/certificationController');
-const { certUpload } = require('../fileUpload');
+} = require('../Controller/certificationController.js');
 
-router.post('/certifications', certUpload, addCertification);
-router.get('/certifications', getCertifications);
-router.put('/certifications/:_id', certUpload, updateCertification);
-router.delete('/certifications/:_id', deleteCertification);
+router.get('/', getCertifications);
+router.post('/', addCertification);
+router.put('/:id', updateCertification);
+router.delete('/:id', deleteCertification);
 
-module.exports = router;
+module.exports = router; // ✅ CommonJS export

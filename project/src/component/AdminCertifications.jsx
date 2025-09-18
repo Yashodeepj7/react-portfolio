@@ -6,7 +6,7 @@ import { FaPlus, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import "./style.css";
 
-const AdminCertifications = () => {
+ const AdminCertifications = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [certs, setCerts] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -42,17 +42,7 @@ const AdminCertifications = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("title", newCert.title);
-      formData.append("provider", newCert.provider);
-      formData.append("issued", newCert.issued);
-      formData.append("credentialUrl", newCert.credentialUrl);
-      formData.append("image", newCert.imageUrl); // <- image file
-
-      const res = await axios.post(`${backendUrl}/api/certifications`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
+      const res = await axios.post(`${backendUrl}/api/certifications`, newCert);
       setCerts([...certs, res.data]);
       setShowForm(false);
       setNewCert({ title: "", provider: "", issued: "", imageUrl: "", credentialUrl: "" });
@@ -65,22 +55,13 @@ const AdminCertifications = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("title", editingCert.title);
-      formData.append("provider", editingCert.provider);
-      formData.append("issued", editingCert.issued);
-      formData.append("credentialUrl", editingCert.credentialUrl);
-      if (editingCert.imageUrl instanceof File) {
-        formData.append("image", editingCert.imageUrl);
-      }
-
       const res = await axios.put(
         `${backendUrl}/api/certifications/${editingCert._id}`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        editingCert
       );
-
-      setCerts(certs.map((c) => (c._id === editingCert._id ? res.data : c)));
+      setCerts(
+        certs.map((c) => (c._id === editingCert._id ? res.data : c))
+      );
       setShowEditForm(false);
       setEditingCert(null);
     } catch (err) {
@@ -114,21 +95,21 @@ const AdminCertifications = () => {
             <th>Provider</th>
             <th>Issued</th>
             <th>Image</th>
-            <th>Credential URL</th>
+            <th>Credential</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {certs.map((cert) => (
-            <tr key={cert._id}>
-              <td>{cert.title}</td>
-              <td>{cert.provider}</td>
-              <td>{cert.issued}</td>
+          {certs.map((c) => (
+            <tr key={c._id}>
+              <td>{c.title}</td>
+              <td>{c.provider}</td>
+              <td>{c.issued}</td>
               <td>
-                <img src={cert.imageUrl} alt="" style={{ width: "80px" }} />
+                <img src={c.imageUrl} alt="" width="60" height="40" />
               </td>
               <td>
-                <a href={cert.credentialUrl} target="_blank" rel="noreferrer">
+                <a href={c.credentialUrl} target="_blank" rel="noreferrer">
                   View
                 </a>
               </td>
@@ -136,17 +117,18 @@ const AdminCertifications = () => {
                 <Button
                   variant="warning"
                   size="sm"
+                  className="me-2"
                   onClick={() => {
-                    setEditingCert(cert);
+                    setEditingCert(c);
                     setShowEditForm(true);
                   }}
                 >
                   <FaRegEdit />
-                </Button>{" "}
+                </Button>
                 <Button
                   variant="danger"
                   size="sm"
-                  onClick={() => handleDelete(cert._id)}
+                  onClick={() => handleDelete(c._id)}
                 >
                   <MdDeleteOutline />
                 </Button>
@@ -163,74 +145,106 @@ const AdminCertifications = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Title</Form.Label>
-              <Form.Control name="title" value={newCert.title} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Provider</Form.Label>
-              <Form.Control name="provider" value={newCert.provider} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Issued</Form.Label>
-              <Form.Control name="issued" value={newCert.issued} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Credential URL</Form.Label>
-              <Form.Control name="credentialUrl" value={newCert.credentialUrl} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                type="file"
-                name="imageUrl"
-                onChange={(e) => setNewCert({ ...newCert, imageUrl: e.target.files[0] })}
-              />
-            </Form.Group>
-            <Button type="submit" className="mt-3">Save</Button>
+            <Form.Control
+              placeholder="Title"
+              name="title"
+              value={newCert.title}
+              onChange={handleChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Provider"
+              name="provider"
+              value={newCert.provider}
+              onChange={handleChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Issued (Month Year)"
+              name="issued"
+              value={newCert.issued}
+              onChange={handleChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Image URL"
+              name="imageUrl"
+              value={newCert.imageUrl}
+              onChange={handleChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Credential URL"
+              name="credentialUrl"
+              value={newCert.credentialUrl}
+              onChange={handleChange}
+              className="mb-2"
+              required
+            />
+            <Button type="submit" className="mt-2 w-100">
+              Add
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Modal */}
-      {editingCert && (
-        <Modal show={showEditForm} onHide={() => setShowEditForm(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Certification</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleEditSubmit}>
-              <Form.Group>
-                <Form.Label>Title</Form.Label>
-                <Form.Control name="title" value={editingCert.title} onChange={handleEditChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Provider</Form.Label>
-                <Form.Control name="provider" value={editingCert.provider} onChange={handleEditChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Issued</Form.Label>
-                <Form.Control name="issued" value={editingCert.issued} onChange={handleEditChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Credential URL</Form.Label>
-                <Form.Control name="credentialUrl" value={editingCert.credentialUrl} onChange={handleEditChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Image</Form.Label>
-                <Form.Control
-                  type="file"
-                  name="imageUrl"
-                  onChange={(e) =>
-                    setEditingCert({ ...editingCert, imageUrl: e.target.files[0] })
-                  }
-                />
-              </Form.Group>
-              <Button type="submit" className="mt-3">Update</Button>
-            </Form>
-          </Modal.Body>
-        </Modal>
-      )}
+      <Modal show={showEditForm} onHide={() => setShowEditForm(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Certification</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleEditSubmit}>
+            <Form.Control
+              placeholder="Title"
+              name="title"
+              value={editingCert?.title || ""}
+              onChange={handleEditChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Provider"
+              name="provider"
+              value={editingCert?.provider || ""}
+              onChange={handleEditChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Issued"
+              name="issued"
+              value={editingCert?.issued || ""}
+              onChange={handleEditChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Image URL"
+              name="imageUrl"
+              value={editingCert?.imageUrl || ""}
+              onChange={handleEditChange}
+              className="mb-2"
+              required
+            />
+            <Form.Control
+              placeholder="Credential URL"
+              name="credentialUrl"
+              value={editingCert?.credentialUrl || ""}
+              onChange={handleEditChange}
+              className="mb-2"
+              required
+            />
+            <Button type="submit" className="mt-2 w-100">
+              Update
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };
