@@ -19,6 +19,7 @@ export const Certifications = () => {
         <h2 className="text-center mb-4 text-white">
           My <span className="purple">Certifications</span>
         </h2>
+        <p className="mb-4">Here are a few Certifications I've worked on recently.</p>
         <Row>
           {certificationsData.map((cert, index) => (
             <Col md={4} sm={6} xs={12} key={index} className="mb-4">
