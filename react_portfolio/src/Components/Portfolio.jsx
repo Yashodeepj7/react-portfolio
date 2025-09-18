@@ -37,7 +37,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/getproject`) 
+      .get(`${import.meta.env.VITE_BACKEND_URL}/getproject`)
       .then((res) => {
         console.log("API Response:", res.data); // Debugging: Check response format
         setProjects(res.data);
@@ -69,14 +69,15 @@ const Portfolio = () => {
                         <Card.Title>{project.projectName || "Untitled Project"}</Card.Title>
                         <Card.Text>{project.projectDisc || "No description available."}</Card.Text>
                       </div>
-                      <div>
-                        <Button  as="a" style={{ backgroundColor: "#6b46c1", border: "none" }} href={project.githubLink || "Github Link is not available"} target="_blank" className="me-2" >
+                      <div className="d-flex gap-2 mt-3">
+                        <Button as="a" href={project.githubLink} target="_blank" rel="noopener noreferrer">
                           GitHub
                         </Button>
-                        <Button  as="a" style={{ backgroundColor: "#a855f7", border: "none" }} href={project.demoLink || "Demo Link not available"} target="_blank" >
+                        <Button as="a" href={project.demoLink} target="_blank" rel="noopener noreferrer">
                           Demo
                         </Button>
                       </div>
+
                     </Card.Body>
                   </Card>
                 </Col>
