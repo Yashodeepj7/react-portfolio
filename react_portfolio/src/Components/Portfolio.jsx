@@ -70,12 +70,12 @@ const Portfolio = () => {
                         <Card.Text>{project.projectDisc || "No description available."}</Card.Text>
                       </div>
                       <div>
-                        <a  as="a" style={{ backgroundColor: "#6b46c1", border: "none" }} href={project.githubLink || "Github Link is not available"} target="_blank" className="me-2" >
+                       <Button style={{ backgroundColor: "#6b46c1", border: "none" }}> <a  as="a"  href={project.githubLink || "Github Link is not available"} target="_blank" className="me-2" >
                           GitHub
-                        </a>
-                        <a  as="a" style={{ backgroundColor: "#a855f7", border: "none" }} href={project.demoLink || "Demo Link not available"} target="_blank" >
+                        </a></Button>
+                       <Button style={{ backgroundColor: "#a855f7", border: "none" }}> <a  as="a"  href={project.demoLink || "Demo Link not available"} target="_blank" >
                           Demo
-                        </a>
+                        </a></Button> 
                       </div>
                     </Card.Body>
                   </Card>
