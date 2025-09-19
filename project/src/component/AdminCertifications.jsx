@@ -15,11 +15,10 @@ const AdminCertifications = () => {
     title: "",
     provider: "",
     issued: "",
+    imageUrl: "",
     credentialUrl: "",
   });
-  const [newImage, setNewImage] = useState(null);
   const [editingCert, setEditingCert] = useState(null);
-  const [editImage, setEditImage] = useState(null);
 
   // Fetch Certifications
   useEffect(() => {
@@ -48,7 +47,7 @@ const AdminCertifications = () => {
       formData.append("provider", newCert.provider);
       formData.append("issued", newCert.issued);
       formData.append("credentialUrl", newCert.credentialUrl);
-      if (newImage) formData.append("image", newImage);
+      formData.append("image", newCert.imageUrl); // <- image file
 
       const res = await axios.post(`${backendUrl}/api/certifications`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -56,8 +55,7 @@ const AdminCertifications = () => {
 
       setCerts([...certs, res.data]);
       setShowForm(false);
-      setNewCert({ title: "", provider: "", issued: "", credentialUrl: "" });
-      setNewImage(null);
+      setNewCert({ title: "", provider: "", issued: "", imageUrl: "", credentialUrl: "" });
     } catch (err) {
       console.log(err);
     }
@@ -72,7 +70,9 @@ const AdminCertifications = () => {
       formData.append("provider", editingCert.provider);
       formData.append("issued", editingCert.issued);
       formData.append("credentialUrl", editingCert.credentialUrl);
-      if (editImage) formData.append("image", editImage);
+      if (editingCert.imageUrl instanceof File) {
+        formData.append("image", editingCert.imageUrl);
+      }
 
       const res = await axios.put(
         `${backendUrl}/api/certifications/${editingCert._id}`,
@@ -83,7 +83,6 @@ const AdminCertifications = () => {
       setCerts(certs.map((c) => (c._id === editingCert._id ? res.data : c)));
       setShowEditForm(false);
       setEditingCert(null);
-      setEditImage(null);
     } catch (err) {
       console.log(err);
     }
@@ -104,7 +103,7 @@ const AdminCertifications = () => {
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Certifications</h2>
         <Button onClick={() => setShowForm(true)}>
-          <FaPlus /> Add Certification
+          <FaPlus /> Add
         </Button>
       </div>
 
@@ -126,13 +125,7 @@ const AdminCertifications = () => {
               <td>{cert.provider}</td>
               <td>{cert.issued}</td>
               <td>
-                {cert.imageUrl && (
-                  <img
-                    src={cert.imageUrl}
-                    alt="cert"
-                    style={{ width: "50px", height: "50px", objectFit: "cover" }}
-                  />
-                )}
+                <img src={cert.imageUrl} alt="" style={{ width: "80px" }} />
               </td>
               <td>
                 <a href={cert.credentialUrl} target="_blank" rel="noreferrer">
@@ -143,14 +136,13 @@ const AdminCertifications = () => {
                 <Button
                   variant="warning"
                   size="sm"
-                  className="me-2"
                   onClick={() => {
                     setEditingCert(cert);
                     setShowEditForm(true);
                   }}
                 >
                   <FaRegEdit />
-                </Button>
+                </Button>{" "}
                 <Button
                   variant="danger"
                   size="sm"
@@ -171,121 +163,74 @@ const AdminCertifications = () => {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
+            <Form.Group>
               <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={newCert.title}
-                onChange={handleChange}
-                required
-              />
+              <Form.Control name="title" value={newCert.title} onChange={handleChange} />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group>
               <Form.Label>Provider</Form.Label>
-              <Form.Control
-                type="text"
-                name="provider"
-                value={newCert.provider}
-                onChange={handleChange}
-                required
-              />
+              <Form.Control name="provider" value={newCert.provider} onChange={handleChange} />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group>
               <Form.Label>Issued</Form.Label>
-              <Form.Control
-                type="text"
-                name="issued"
-                value={newCert.issued}
-                onChange={handleChange}
-                required
-              />
+              <Form.Control name="issued" value={newCert.issued} onChange={handleChange} />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group>
               <Form.Label>Credential URL</Form.Label>
-              <Form.Control
-                type="text"
-                name="credentialUrl"
-                value={newCert.credentialUrl}
-                onChange={handleChange}
-                required
-              />
+              <Form.Control name="credentialUrl" value={newCert.credentialUrl} onChange={handleChange} />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group>
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="file"
-                accept="image/*"
-                onChange={(e) => setNewImage(e.target.files[0])}
-                required
+                name="imageUrl"
+                onChange={(e) => setNewCert({ ...newCert, imageUrl: e.target.files[0] })}
               />
             </Form.Group>
-            <Button type="submit">Add</Button>
+            <Button type="submit" className="mt-3">Save</Button>
           </Form>
         </Modal.Body>
       </Modal>
 
       {/* Edit Modal */}
-      <Modal show={showEditForm} onHide={() => setShowEditForm(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Certification</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {editingCert && (
+      {editingCert && (
+        <Modal show={showEditForm} onHide={() => setShowEditForm(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Certification</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Form onSubmit={handleEditSubmit}>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="title"
-                  value={editingCert.title}
-                  onChange={handleEditChange}
-                  required
-                />
+                <Form.Control name="title" value={editingCert.title} onChange={handleEditChange} />
               </Form.Group>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>Provider</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="provider"
-                  value={editingCert.provider}
-                  onChange={handleEditChange}
-                  required
-                />
+                <Form.Control name="provider" value={editingCert.provider} onChange={handleEditChange} />
               </Form.Group>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>Issued</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="issued"
-                  value={editingCert.issued}
-                  onChange={handleEditChange}
-                  required
-                />
+                <Form.Control name="issued" value={editingCert.issued} onChange={handleEditChange} />
               </Form.Group>
-              <Form.Group className="mb-3">
+              <Form.Group>
                 <Form.Label>Credential URL</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="credentialUrl"
-                  value={editingCert.credentialUrl}
-                  onChange={handleEditChange}
-                  required
-                />
+                <Form.Control name="credentialUrl" value={editingCert.credentialUrl} onChange={handleEditChange} />
               </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>New Image (optional)</Form.Label>
+              <Form.Group>
+                <Form.Label>Image</Form.Label>
                 <Form.Control
                   type="file"
-                  accept="image/*"
-                  onChange={(e) => setEditImage(e.target.files[0])}
+                  name="imageUrl"
+                  onChange={(e) =>
+                    setEditingCert({ ...editingCert, imageUrl: e.target.files[0] })
+                  }
                 />
               </Form.Group>
-              <Button type="submit">Update</Button>
+              <Button type="submit" className="mt-3">Update</Button>
             </Form>
-          )}
-        </Modal.Body>
-      </Modal>
+          </Modal.Body>
+        </Modal>
+      )}
     </Container>
   );
 };
