@@ -8,9 +8,9 @@ const {
 } = require('../Controller/certificationController');
 const { certUpload } = require('../fileUpload');
 
-router.post('/', certUpload, addCertification);
-router.get('/', getCertifications);
-router.put('/:_id', certUpload, updateCertification);
-router.delete('/:_id', deleteCertification);
+router.post('/certifications', certUpload, addCertification);
+router.get('/certifications', getCertifications);
+router.put('/certifications/:_id', certUpload, updateCertification);
+router.delete('/certifications/:_id', deleteCertification);
 
 module.exports = router;

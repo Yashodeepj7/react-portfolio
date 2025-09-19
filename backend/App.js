@@ -24,7 +24,7 @@ const certificationRoutes = require("./route/certificationRoutes.js");
 app.use('/',route2);//using route.js
 app.use('/',route);//using route.js
 app.use('/images',express.static('Images'));//using Images folder
-app.use("/api/certifications", certificationRoutes);
+app.use("/api", certificationRoutes);
 
 const route3 = require('./route/authRoute');//importing route.js
 app.use('/auth', route3);
