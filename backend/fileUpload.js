@@ -5,7 +5,7 @@ const cloudinary = require('./utils/cloudinary');
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'projects', // Cloudinary folder name
+    folder: 'projects',
     allowed_formats: ['jpg', 'png', 'jpeg'],
     transformation: [{ width: 500, height: 500, crop: 'limit' }],
   },
@@ -13,10 +13,8 @@ const storage = new CloudinaryStorage({
 
 const photoUpload = multer({
   storage: storage,
-  limits: { fileSize: 1 * 1024 * 1024 }, // 1MB limit
+  limits: { fileSize: 1 * 1024 * 1024 },
 }).single('image');
-
-module.exports = { photoUpload };
 
 const certStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
@@ -29,7 +27,8 @@ const certStorage = new CloudinaryStorage({
 
 const certUpload = multer({
   storage: certStorage,
-  limits: { fileSize: 1 * 1024 * 1024 }, // 1MB
+  limits: { fileSize: 1 * 1024 * 1024 },
 }).single('image');
 
-module.exports = { certUpload };
+
+module.exports = { photoUpload, certUpload };
