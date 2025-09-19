@@ -6,7 +6,7 @@ import { FaPlus, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import "./style.css";
 
- const AdminCertifications = () => {
+const AdminCertifications = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [certs, setCerts] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -15,10 +15,11 @@ import "./style.css";
     title: "",
     provider: "",
     issued: "",
-    imageUrl: "",
     credentialUrl: "",
   });
+  const [newImage, setNewImage] = useState(null);
   const [editingCert, setEditingCert] = useState(null);
+  const [editImage, setEditImage] = useState(null);
 
   // Fetch Certifications
   useEffect(() => {
@@ -42,10 +43,21 @@ import "./style.css";
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${backendUrl}/api/certifications`, newCert);
+      const formData = new FormData();
+      formData.append("title", newCert.title);
+      formData.append("provider", newCert.provider);
+      formData.append("issued", newCert.issued);
+      formData.append("credentialUrl", newCert.credentialUrl);
+      if (newImage) formData.append("image", newImage);
+
+      const res = await axios.post(`${backendUrl}/api/certifications`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       setCerts([...certs, res.data]);
       setShowForm(false);
-      setNewCert({ title: "", provider: "", issued: "", imageUrl: "", credentialUrl: "" });
+      setNewCert({ title: "", provider: "", issued: "", credentialUrl: "" });
+      setNewImage(null);
     } catch (err) {
       console.log(err);
     }
@@ -55,15 +67,23 @@ import "./style.css";
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("title", editingCert.title);
+      formData.append("provider", editingCert.provider);
+      formData.append("issued", editingCert.issued);
+      formData.append("credentialUrl", editingCert.credentialUrl);
+      if (editImage) formData.append("image", editImage);
+
       const res = await axios.put(
         `${backendUrl}/api/certifications/${editingCert._id}`,
-        editingCert
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
-      setCerts(
-        certs.map((c) => (c._id === editingCert._id ? res.data : c))
-      );
+
+      setCerts(certs.map((c) => (c._id === editingCert._id ? res.data : c)));
       setShowEditForm(false);
       setEditingCert(null);
+      setEditImage(null);
     } catch (err) {
       console.log(err);
     }
@@ -84,7 +104,7 @@ import "./style.css";
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Certifications</h2>
         <Button onClick={() => setShowForm(true)}>
-          <FaPlus /> Add
+          <FaPlus /> Add Certification
         </Button>
       </div>
 
@@ -95,21 +115,27 @@ import "./style.css";
             <th>Provider</th>
             <th>Issued</th>
             <th>Image</th>
-            <th>Credential</th>
+            <th>Credential URL</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {certs.map((c) => (
-            <tr key={c._id}>
-              <td>{c.title}</td>
-              <td>{c.provider}</td>
-              <td>{c.issued}</td>
+          {certs.map((cert) => (
+            <tr key={cert._id}>
+              <td>{cert.title}</td>
+              <td>{cert.provider}</td>
+              <td>{cert.issued}</td>
               <td>
-                <img src={c.imageUrl} alt="" width="60" height="40" />
+                {cert.imageUrl && (
+                  <img
+                    src={cert.imageUrl}
+                    alt="cert"
+                    style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                  />
+                )}
               </td>
               <td>
-                <a href={c.credentialUrl} target="_blank" rel="noreferrer">
+                <a href={cert.credentialUrl} target="_blank" rel="noreferrer">
                   View
                 </a>
               </td>
@@ -119,7 +145,7 @@ import "./style.css";
                   size="sm"
                   className="me-2"
                   onClick={() => {
-                    setEditingCert(c);
+                    setEditingCert(cert);
                     setShowEditForm(true);
                   }}
                 >
@@ -128,7 +154,7 @@ import "./style.css";
                 <Button
                   variant="danger"
                   size="sm"
-                  onClick={() => handleDelete(c._id)}
+                  onClick={() => handleDelete(cert._id)}
                 >
                   <MdDeleteOutline />
                 </Button>
@@ -145,49 +171,56 @@ import "./style.css";
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Control
-              placeholder="Title"
-              name="title"
-              value={newCert.title}
-              onChange={handleChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Provider"
-              name="provider"
-              value={newCert.provider}
-              onChange={handleChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Issued (Month Year)"
-              name="issued"
-              value={newCert.issued}
-              onChange={handleChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Image URL"
-              name="imageUrl"
-              value={newCert.imageUrl}
-              onChange={handleChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Credential URL"
-              name="credentialUrl"
-              value={newCert.credentialUrl}
-              onChange={handleChange}
-              className="mb-2"
-              required
-            />
-            <Button type="submit" className="mt-2 w-100">
-              Add
-            </Button>
+            <Form.Group className="mb-3">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={newCert.title}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Provider</Form.Label>
+              <Form.Control
+                type="text"
+                name="provider"
+                value={newCert.provider}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Issued</Form.Label>
+              <Form.Control
+                type="text"
+                name="issued"
+                value={newCert.issued}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Credential URL</Form.Label>
+              <Form.Control
+                type="text"
+                name="credentialUrl"
+                value={newCert.credentialUrl}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="file"
+                accept="image/*"
+                onChange={(e) => setNewImage(e.target.files[0])}
+                required
+              />
+            </Form.Group>
+            <Button type="submit">Add</Button>
           </Form>
         </Modal.Body>
       </Modal>
@@ -198,51 +231,59 @@ import "./style.css";
           <Modal.Title>Edit Certification</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleEditSubmit}>
-            <Form.Control
-              placeholder="Title"
-              name="title"
-              value={editingCert?.title || ""}
-              onChange={handleEditChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Provider"
-              name="provider"
-              value={editingCert?.provider || ""}
-              onChange={handleEditChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Issued"
-              name="issued"
-              value={editingCert?.issued || ""}
-              onChange={handleEditChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Image URL"
-              name="imageUrl"
-              value={editingCert?.imageUrl || ""}
-              onChange={handleEditChange}
-              className="mb-2"
-              required
-            />
-            <Form.Control
-              placeholder="Credential URL"
-              name="credentialUrl"
-              value={editingCert?.credentialUrl || ""}
-              onChange={handleEditChange}
-              className="mb-2"
-              required
-            />
-            <Button type="submit" className="mt-2 w-100">
-              Update
-            </Button>
-          </Form>
+          {editingCert && (
+            <Form onSubmit={handleEditSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="title"
+                  value={editingCert.title}
+                  onChange={handleEditChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Provider</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="provider"
+                  value={editingCert.provider}
+                  onChange={handleEditChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Issued</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="issued"
+                  value={editingCert.issued}
+                  onChange={handleEditChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Credential URL</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="credentialUrl"
+                  value={editingCert.credentialUrl}
+                  onChange={handleEditChange}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>New Image (optional)</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setEditImage(e.target.files[0])}
+                />
+              </Form.Group>
+              <Button type="submit">Update</Button>
+            </Form>
+          )}
         </Modal.Body>
       </Modal>
     </Container>
