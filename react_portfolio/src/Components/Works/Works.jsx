@@ -17,6 +17,7 @@ export const Works = () => {
   });
 
   return (
+    <div id="works">
     <Container fluid style={{ backgroundColor: "#0a0a0a", minHeight: "100vh" }}>
       <Container className="text-center text-white py-5">
         <h2 className="mb-4">
@@ -44,5 +45,6 @@ export const Works = () => {
         {activeTab === "certifications" && <Certifications />}
       </Container>
     </Container>
+    </div>
   );
 };
