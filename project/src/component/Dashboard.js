@@ -4,12 +4,10 @@ import img2 from './img2/char2.PNG'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const visitorsData = [
-  { month: 'Jan', visitors: 120 },
-  { month: 'Feb', visitors: 200 },
-  { month: 'Mar', visitors: 150 },
-  { month: 'Apr', visitors: 300 },
-  { month: 'May', visitors: 250 },
-  { month: 'Jun', visitors: 400 },
+  { month: 'Jun', visitors: 9 },
+  { month: 'Jul', visitors: 12 },
+  { month: 'Aug', visitors: 14 },
+  { month: 'Sep', visitors: 24 },
 ];
 const Dashboard = () => {
     return(
@@ -39,7 +37,7 @@ const Dashboard = () => {
                                 <h4>No. of Projects
                                     <span><box-icon name='briefcase-alt' color='#ffffff'></box-icon></span>
                                 </h4>
-                                <h2>15</h2>
+                                <h2>3</h2>
                                 <p className='d-flex gap-2 mt-2 '>Updated Recently
                                     <span><box-icon name='time' type='solid' color='#12ec22'></box-icon></span>
                                 </p>
@@ -52,7 +50,7 @@ const Dashboard = () => {
                                 <h4>No. of Certifications
                                     <span><box-icon name='award' type='solid' color='#ffffff'></box-icon></span>
                                 </h4>
-                                <h2>8</h2>
+                                <h2>4</h2>
                                 <p className='d-flex gap-2 mt-2 '>Verified Certificates
                                     <span><box-icon name='check-circle' type='solid' color='#E6FF31'></box-icon></span>
                                 </p>
@@ -65,7 +63,7 @@ const Dashboard = () => {
                                 <h4>Contact Requests
                                     <span><box-icon name='envelope' color='#ffffff'></box-icon></span>
                                 </h4>
-                                <h2>23</h2>
+                                <h2>10</h2>
                                 <p className='d-flex gap-2 mt-2 '>New This Week
                                     <span><box-icon name='message-detail' type='solid' color='#21FF04'></box-icon></span>
                                 </p>
