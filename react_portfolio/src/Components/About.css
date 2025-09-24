@@ -169,3 +169,80 @@
 body {
   overflow-x: hidden;
 }
+
+
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+  .home-about-section {
+    height: auto; /* full height hata ke auto kar diya */
+    padding: 40px 15px;
+    text-align: center;
+  }
+
+  .home-about-description h1 {
+    font-size: 2em;
+    padding-bottom: 15px;
+  }
+
+  .home-about-body {
+    font-size: 1em;
+    line-height: 1.6;
+    padding-right: 0;
+    text-align: center; /* justify se center */
+  }
+
+  .myAvtar {
+    margin-top: 20px;
+    padding-top: 0;
+  }
+
+  .avatar-img {
+    max-width: 180px; /* mobile ke liye chhoti */
+  }
+
+  /* Techstack responsiveness */
+  .tech-scroll-card {
+    width: 70px;
+    height: 70px;
+    margin: 6px 8px;
+  }
+
+  .icon-wrapper {
+    font-size: 28px;
+  }
+
+  .logo-row::before,
+  .logo-row::after {
+    width: 80px; /* fade overlay chhoti screen me chhota kar diya */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-about-description h1 {
+    font-size: 1.6em;
+  }
+
+  .home-about-body {
+    font-size: 0.95em;
+  }
+
+  .avatar-img {
+    max-width: 150px;
+  }
+
+  .tech-scroll-card {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+  }
+
+  .icon-wrapper {
+    font-size: 24px;
+  }
+
+  .logo-row::before,
+  .logo-row::after {
+    width: 50px;
+  }
+}

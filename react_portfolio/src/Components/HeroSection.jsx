@@ -14,7 +14,12 @@ export const HeroSection = () => {
   const [subIndex, setSubIndex] = useState(0); // index in current word
   const [deleting, setDeleting] = useState(false);
 
-
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/getcontact")
+      .then((res) => setUser(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     if (!deleting && subIndex === titles[index].length + 1) {
@@ -66,27 +71,31 @@ export const HeroSection = () => {
             <h1 className="mb-0">
               <span className="typewriter-text">{text}</span>
             </h1>
-                <div className="social-container">
-      <a href="https://www.facebook.com/yashodeep.joshi.7?rdid=Oein82x9kKXKGwDL&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FQiXuBLm9qXQerrK4%2F#" target="_blank" className="social-icon">
-        <FaFacebookF />
-      </a>
-      <a href="https://www.instagram.com/mr_yasho_101/profilecard/?igsh=MnZoaWZrYWFxdzM1" target="_blank" className="social-icon">
-        <FaInstagram />
-      </a>
-      <a href="https://www.linkedin.com/in/yashodeep-joshi-ba9295244/" target="_blank" className="social-icon">
-        <FaLinkedinIn />
-      </a>
-      <a href="https://github.com/Yashodeepj7" target="_blank" className="social-icon">
-        <FaGithub />
-      </a><br /><br />
-      <a href={resume} target="_blank" className="resume-btn">
-        My Resume
-      </a>
-    </div>
+            <div className="social-container">
+              <a href="https://www.facebook.com/yashodeep.joshi.7?rdid=Oein82x9kKXKGwDL&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FQiXuBLm9qXQerrK4%2F#" target="_blank" className="social-icon">
+                <FaFacebookF />
+              </a>
+              <a href="https://www.instagram.com/mr_yasho_101/profilecard/?igsh=MnZoaWZrYWFxdzM1" target="_blank" className="social-icon">
+                <FaInstagram />
+              </a>
+              <a href="https://www.linkedin.com/in/yashodeep-joshi-ba9295244/" target="_blank" className="social-icon">
+                <FaLinkedinIn />
+              </a>
+              <a href="https://github.com/Yashodeepj7" target="_blank" className="social-icon">
+                <FaGithub />
+              </a><br /><br />
+              <a href={resume} target="_blank" className="resume-btn">
+                My Resume
+              </a>
+            </div>
           </Col>
 
           {/* Right side Lottie animation */}
-          <Col md={7} className="d-flex justify-content-center" style={{width:"50vw" }}>
+          <Col
+            md={7}
+            className="d-none d-md-flex justify-content-center"
+            style={{ width: "50vw" }}
+          >
             <DotLottieReact
               src="https://lottie.host/9730ac13-9ed4-4b73-894d-8be8ac862536/yuklmpW0JU.lottie"
               loop
