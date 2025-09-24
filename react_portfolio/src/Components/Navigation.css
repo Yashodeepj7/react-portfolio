@@ -60,3 +60,26 @@
   left: 0;
 }
 
+/* Mobile friendly fixes */
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+}
+
+.navbar-collapse {
+  background-color: rgba(9, 9, 9, 0.95); /* Dark glass look */
+  border-radius: 15px;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    width: 90%;
+    justify-content: space-between;
+    padding: 7px 15px;
+  }
+  .nav-links .nav-link {
+    display: block;
+    margin: 10px 0;
+  }
+}

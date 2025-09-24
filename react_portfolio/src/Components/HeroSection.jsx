@@ -14,12 +14,7 @@ export const HeroSection = () => {
   const [subIndex, setSubIndex] = useState(0); // index in current word
   const [deleting, setDeleting] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/getcontact")
-      .then((res) => setUser(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+
 
   useEffect(() => {
     if (!deleting && subIndex === titles[index].length + 1) {
@@ -91,19 +86,22 @@ export const HeroSection = () => {
           </Col>
 
           {/* Right side Lottie animation */}
-          <Col md={7} className="d-flex justify-content-center" style={{width:"50vw" }}>
-            <DotLottieReact
-              src="https://lottie.host/9730ac13-9ed4-4b73-894d-8be8ac862536/yuklmpW0JU.lottie"
-              loop
-              autoplay
-            />
-          </Col>
+         {/* Right side Lottie animation */}
+<Col md={7} className="d-flex justify-content-center">
+  <DotLottieReact
+    src="https://lottie.host/9730ac13-9ed4-4b73-894d-8be8ac862536/yuklmpW0JU.lottie"
+    loop
+    autoplay
+    style={{ width: "100%", maxWidth: "500px" }} // Responsive size
+  />
+</Col>
+
         </Row>
 
-        {/* Image: Visible on small screens, centered */}
+        {/* Image: Visible on small screens, centered
         <div className="d-block d-md-none text-center mt-4">
           <img src={heroImage} alt="Hero Small" className="img-fluid" />
-        </div>
+        </div> */}
       </Container>
     </div>
   );
