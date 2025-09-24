@@ -86,16 +86,13 @@ export const HeroSection = () => {
           </Col>
 
           {/* Right side Lottie animation */}
-         {/* Right side Lottie animation */}
-<Col md={7} className="d-flex justify-content-center">
-  <DotLottieReact
-    src="https://lottie.host/9730ac13-9ed4-4b73-894d-8be8ac862536/yuklmpW0JU.lottie"
-    loop
-    autoplay
-    style={{ width: "100%", maxWidth: "500px" }} // Responsive size
-  />
-</Col>
-
+          <Col md={7} className="d-flex justify-content-center" style={{width:"50vw" }}>
+            <DotLottieReact
+              src="https://lottie.host/9730ac13-9ed4-4b73-894d-8be8ac862536/yuklmpW0JU.lottie"
+              loop
+              autoplay
+            />
+          </Col>
         </Row>
 
         {/* Image: Visible on small screens, centered
