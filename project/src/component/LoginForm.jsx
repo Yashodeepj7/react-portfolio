@@ -9,7 +9,7 @@ export const LoginForm = ({ onLogin, onNavigateToRegister }) => {
     e.preventDefault();
 
     // For demo: static login credentials
-    if (email === "admin777@gmail.com" && password === "12345") {
+    if (email === "admin777@gmail.com" && password === "123") {
       onLogin(); // call parent function
     } else {
       alert("Invalid email or password!");
