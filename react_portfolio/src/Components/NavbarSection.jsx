@@ -38,7 +38,7 @@ export const Navigation = () => {
             </Nav.Link>
             <Nav.Link
               href="https://showcase.talenlio.com/w/Yashodeep-Yogesh-Joshi-17895"
-              target="_blank"
+            
               onClick={() => setExpanded(false)}
             >
               Resume
