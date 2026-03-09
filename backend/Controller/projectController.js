@@ -9,7 +9,7 @@ const addProject = async (req, res) => {
       projectDisc,
       githubLink,
       demoLink,
-      image: req.file ? req.file.path : null, // ✅ Cloudinary image URL
+      image: req.file ? req.file.path : null, //Cloudinary image URL
     });
     res.status(200).send(data);
   } catch (err) {
@@ -51,7 +51,7 @@ const updateProject = async (req, res) => {
     };
 
     if (req.file) {
-      updateFields.image = req.file.path; // ✅ Cloudinary image URL if new image uploaded
+      updateFields.image = req.file.path; // Cloudinary image URL if new image uploaded
     }
 
     const updatedata = await model.updateOne(
