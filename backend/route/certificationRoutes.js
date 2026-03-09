@@ -13,4 +13,4 @@ router.post('/', addCertification);
 router.put('/:id', updateCertification);
 router.delete('/:id', deleteCertification);
 
-module.exports = router; // ✅ CommonJS export
+module.exports = router; //CommonJS export
