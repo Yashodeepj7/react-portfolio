@@ -1,4 +1,3 @@
-import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Outlet } from 'react-router-dom';
 
@@ -7,7 +6,7 @@ const Nav = () => {
         <>
             <nav className="px-2 navbar navbar-expand-lg navbar-light bg-white w-100">
 
-                <a className="navbar-brand mx-3 fs-4" href="#">Welcome To Dashboard!</a>
+                <span className="navbar-brand mx-3 fs-4">Welcome To Dashboard!</span>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

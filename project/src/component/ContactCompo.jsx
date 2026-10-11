@@ -6,22 +6,17 @@ import axios from "axios";
 import { MdDeleteOutline } from "react-icons/md";
 import './style.css';
 
-export const ContactCompo = ()=>
-{
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    const [user, setUser] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [newUser, setNewUser] = useState(
-    { rollno: "", 
-      name: "",
-      email: ""
-     });
 
-     // Fetch users from API
+export const ContactCompo = () => {
+  const [user, setUser] = useState([]);
+
+  // Fetch users from API
   useEffect(() => {
-    axios.get(`${backendUrl}/getcontact`)
-    .then((res) => setUser(res.data))
-    .catch((err) => console.log(err));
+    axios
+      .get(`${backendUrl}/getcontact`)
+      .then((res) => setUser(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
   // const handleChange = (e) => {

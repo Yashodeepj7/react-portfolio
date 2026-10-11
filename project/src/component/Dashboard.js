@@ -1,6 +1,4 @@
 import 'boxicons'
-import img from './img2/chart1.PNG'
-import img2 from './img2/char2.PNG'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const visitorsData = [

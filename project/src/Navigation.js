@@ -1,9 +1,5 @@
-import { BrowserRouter,Outlet,Route,Routes } from "react-router-dom";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from './component/Dashboard';
-import Cards from './component/Cards';
-
-import { LoginCompo } from "./component/LoginCompo";
 const Navigation = () => {
     return(
         <BrowserRouter>

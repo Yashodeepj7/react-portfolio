@@ -26,23 +26,23 @@ const Sidebar = ({ setActiveComponent, setShowLogout }) => {
                         <span><box-icon name='home-alt'></box-icon></span>
                     </li> */}
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>
-                        <a href="#" className='text-white text-decoration-none fw-bold' onClick={() => setActiveComponent("Dashboard")}>Dashboard</a>
+                        <button type="button" className="btn btn-link p-0 text-white text-decoration-none fw-bold shadow-none" onClick={() => setActiveComponent("Dashboard")}>Dashboard</button>
                         <span><box-icon type='solid' name='tachometer'></box-icon></span>
                     </li>
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>
-                        <a href='#' className='text-white text-decoration-none fw-bold' onClick={() => setActiveComponent("Certification")}>Certification</a>
+                        <button type="button" className="btn btn-link p-0 text-white text-decoration-none fw-bold shadow-none" onClick={() => setActiveComponent("Certification")}>Certification</button>
                         <span><box-icon name='table'></box-icon></span>
                     </li>
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>
-                        <a href="#" className='text-white text-decoration-none fw-bold' onClick={() => setActiveComponent("Contact")}>Contact</a>
+                        <button type="button" className="btn btn-link p-0 text-white text-decoration-none fw-bold shadow-none" onClick={() => setActiveComponent("Contact")}>Contact</button>
                         <span><box-icon name='contact' type='solid'></box-icon></span>
                     </li>
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>
-                        <a href="#" className='text-white text-decoration-none fw-bold' onClick={() => setActiveComponent("Form")}>Projects</a>
+                        <button type="button" className="btn btn-link p-0 text-white text-decoration-none fw-bold shadow-none" onClick={() => setActiveComponent("Form")}>Projects</button>
                         <span><box-icon type='logo' name='graphql'></box-icon></span>
                     </li>
                     <li className='py-md-4 py-2 px-md-4 d-flex justify-content-between'>
-                        <a href="#" className='text-white text-decoration-none fw-bold' onClick={() => setShowLogout(true)}>Sign out</a>
+                        <button type="button" className="btn btn-link p-0 text-white text-decoration-none fw-bold shadow-none" onClick={() => setShowLogout(true)}>Sign out</button>
                         <span><box-icon name='log-out'></box-icon></span>
                     </li>
                 </ul>
