@@ -1,9 +1,9 @@
-const Foot = () =>{
-
+const Foot = () => {
+    const currentYear = new Date().getFullYear();
     return(
         <>
         <div className="foot bg-white">
-            <p>copyright @2025</p>
+            <p>copyright @{currentYear}</p>
         </div>
         </>
     )

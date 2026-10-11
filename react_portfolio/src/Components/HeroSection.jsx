@@ -84,7 +84,7 @@ export const HeroSection = () => {
               <a href="https://github.com/Yashodeepj7" target="_blank" className="social-icon">
                 <FaGithub />
               </a><br /><br />
-              <a href={resume} target="_blank" className="resume-btn">
+              <a href="https://drive.google.com/file/d/1fBUx3Loq3flnM3qvSX31AN5IycpSWZxm/view?usp=drive_link" target="_blank" className="resume-btn">
                 My Resume
               </a>
             </div>
